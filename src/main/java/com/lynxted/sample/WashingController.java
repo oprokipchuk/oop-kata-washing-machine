@@ -1,5 +1,7 @@
 package com.lynxted.sample;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
@@ -7,13 +9,10 @@ import java.util.Random;
 import static com.lynxted.sample.Fabric.COTTON;
 import static com.lynxted.sample.Fabric.SILK;
 
+@RequiredArgsConstructor
 class WashingController {
 
     private final WashingService washingService;
-
-    WashingController(WashingService washingService) {
-        this.washingService = washingService;
-    }
 
     void wash(Fabric fabricType) {
         Collection<LaundryElement> laundry = getAllLaundry();
