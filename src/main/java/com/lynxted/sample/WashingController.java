@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 import static com.lynxted.sample.Fabric.COTTON;
@@ -14,18 +15,23 @@ class WashingController {
 
     private final WashingService washingService;
 
-    void wash(Fabric fabricType) {
+    Collection<LaundryElement> wash(Fabric fabricType) {
         Collection<LaundryElement> laundry = getAllLaundry();
-        WashingMachine washingMachine = new WashingMachine();
         Integer spinSpeed = getRequestedSpinSpeed();
         Integer temperature = getRequestedTemperature();
+        return wash(fabricType, laundry, spinSpeed, temperature);
+    }
+
+    Collection<LaundryElement> wash(Fabric fabricType, Collection<LaundryElement> laundry, Integer spinSpeed, Integer temperature) {
+        WashingMachine washingMachine = new WashingMachine();
         if (fabricType == Fabric.WOOL) {
-            washingService.washWool(washingMachine, laundry, spinSpeed, temperature);
+            return washingService.washWool(washingMachine, laundry, spinSpeed, temperature);
         } else if (fabricType == COTTON) {
-            washingService.washCotton(washingMachine, laundry, spinSpeed, temperature);
+            return washingService.washCotton(washingMachine, laundry, spinSpeed, temperature);
         } else if (fabricType == SILK) {
-            washingService.washSilk(washingMachine, laundry, spinSpeed, temperature);
+            return washingService.washSilk(washingMachine, laundry, spinSpeed, temperature);
         }
+        return Collections.emptyList();
     }
 
     private Collection<LaundryElement> getAllLaundry() {
@@ -41,5 +47,4 @@ class WashingController {
     private Integer getRequestedTemperature() {
         return new Random().nextInt(95);
     }
-
 }
