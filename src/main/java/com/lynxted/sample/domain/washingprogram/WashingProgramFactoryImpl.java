@@ -19,7 +19,8 @@ public class WashingProgramFactoryImpl implements WashingProgramFactory {
                 return new CottonWashingProgram(speed, temperature);
             case SILK:
                 return new SilkWashingProgram(speed, temperature);
+            default:
+                throw new IllegalArgumentException();
         }
-        return null;
     }
 }
