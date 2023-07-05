@@ -1,6 +1,6 @@
 package com.lynxted.sample;
 
-enum Fabric {
+public enum Fabric {
     WOOL,
     COTTON,
     SILK

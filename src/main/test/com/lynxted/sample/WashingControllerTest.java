@@ -1,5 +1,9 @@
 package com.lynxted.sample;
 
+import com.lynxted.sample.domain.washingmachine.WashingMachineFactory;
+import com.lynxted.sample.domain.washingmachine.WashingMachineFactoryImpl;
+import com.lynxted.sample.domain.washingprogram.WashingProgramFactory;
+import com.lynxted.sample.domain.washingprogram.WashingProgramFactoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +19,12 @@ public class WashingControllerTest {
 
     private WashingService washingService;
 
-    private WashingMachine washingMachine;
-
     @BeforeEach
     void setUp() {
-        washingService = new WashingService();
+        WashingMachineFactory washingMachineFactory = new WashingMachineFactoryImpl();
+        WashingProgramFactory washingProgramFactory = new WashingProgramFactoryImpl();
+        washingService = new WashingService(washingMachineFactory, washingProgramFactory);
         washingController = new WashingController(washingService);
-        washingMachine = new WashingMachine();
     }
 
     @Test
